@@ -12,7 +12,7 @@ To use, just run:
 pokespeed
 ```
 
-Or optionally supply the CSV location, Pikalytics URL (supplying a Pikalytics url like `https://www.pikalytics.com/pokedex/gen9vgc2023regulatione` will let you specify the format), or Pokemon level (50 for VGC):
+Or optionally supply the CSV location, Pikalytics URL (supplying a Pikalytics url like `https://www.pikalytics.com/pokedex/gen9vgc2023regulatione` will let you specify the format), or Pokemon level (defaults shown below):
 ```
 pokespeed --out ./outspeed_benchmarks.csv --url https://ww.pikalytics.com --level 50
 ```
