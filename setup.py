@@ -14,10 +14,11 @@ setuptools.setup(
         "pypokedex",
         "beautifulsoup4",
         "tqdm",
+        "clize",
     ],
     entry_points={
         "console_scripts": [
-            "pokespeed = pokespeed:main",
+            "pokespeed = pokespeed:run_main",
         ],
     },
 )

@@ -1,5 +1,5 @@
-from pokespeed import main
+from pokespeed import run_main
 
 
 if __name__ == "__main__":
-    main()
+    run_main()

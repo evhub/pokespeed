@@ -7,6 +7,7 @@ import requests
 import pypokedex
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+from clize import run
 
 
 get_entries = (
@@ -92,9 +93,9 @@ def calc_stat(
     base,
     stage=Stage(0),
     nature=Helpful,
+    level=50,
     ev=252,
     iv=31,
-    level=50,
 ) = (
     (2 base + iv + ev//4) * level // 100 + 5
     |> nature.apply
@@ -112,18 +113,18 @@ data PokemonSpeed(
     @property
     def stat(self) = calc_stat(self.base_speed, self.speed_stage, self.speed_nature)
 
-def get_all_speeds(url):
+def get_all_speeds(url, level):
     for mon, stage, nature in cartesian_product(
         get_mons(url),
         important_stages,
         important_natures,
     ):
-        yield PokemonSpeed(mon.name, mon.base_stats.speed, stage, nature)
+        yield PokemonSpeed(mon.name, mon.base_stats.speed, stage, nature, level)
 
 
-def get_outspeed_benchmarks(url):
+def get_outspeed_benchmarks(url, level):
     outspeed_benchmarks: dict[int, dict[Stage, list[PokemonSpeed]]] = defaultdict(defaultdict$(list))
-    speeds = set(get_all_speeds(url))
+    speeds = set(get_all_speeds(url, level))
     for stage in important_stages:
         base_speed = 1
         unused_speeds = speeds.copy()
@@ -137,8 +138,8 @@ def get_outspeed_benchmarks(url):
     return outspeed_benchmarks
 
 
-def write_csv(filename, url):
-    outspeed_benchmarks = get_outspeed_benchmarks(url)
+def write_csv(filename, url, level):
+    outspeed_benchmarks = get_outspeed_benchmarks(url, level)
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Speed: \\ Stage:"] + [str(stage) for stage in important_stages])
@@ -154,5 +155,19 @@ def write_csv(filename, url):
             writer.writerow(row)
 
 
-def main():
-    write_csv("./outspeed_benchmarks.csv", "https://www.pikalytics.com/")
+def main(
+    *,
+    out="./outspeed_benchmarks.csv",
+    url="https://www.pikalytics.com",
+    level=50,
+):
+    """Write Pokemon speed tier data in csv format.
+
+    :param out: The csv file to write the speed tier data to.
+    :param url: The Pikalytics url to get Pokemon from.
+    :param level: The level of the Pokemon to compute speeds at.
+    """
+    write_csv(out, url, level)
+
+
+run_main = run$(main)
