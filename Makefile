@@ -6,6 +6,10 @@ run: install
 force-run: force-install
 	pokespeed
 
+.PHONY: open
+open: run
+	open ./outspeed_benchmarks.csv
+
 .PHONY: install
 install: build
 	pip install -Ue .

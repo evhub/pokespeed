@@ -20,12 +20,11 @@ pokespeed --out ./outspeed_benchmarks.csv --url https://ww.pikalytics.com --leve
 Then, view the resulting CSV file in your favorite spreadsheet viewer (e.g. Google Sheets) to see the generated output. Interpreting the output is relatively straightforward:
 * Each row corresponds to a speed.
 * Each column corresponds to a stat stage:
-  * `-2` is two negative stat changes.
   * `-1` is a negative stat change (e.g. icy wind).
   * `+0` is no stat change.
+  * `-1 x2` is a negative stat change (e.g. icy wind) multiplied by 2 (e.g. tailwind).
   * `+1` is a positive stat change (e.g. dragon dance, choice scarf, speed booster energy).
   * `+2` is two positive stat changes (e.g. tailwind).
-  * `-1 x2` is a negative stat change (e.g. icy wind) multiplied by 2 (e.g. tailwind).
   * `+1 x2` is a positive stat change (e.g. choice scarf) multiplied by 2 (e.g. tailwind).
 * Each cell corresponds to the Pokemon you **outspeed** if you have that row's speed and you are under the effects of that column's speed modifier. (So the speed in the row isn't the speed that each of the listed Pokemon hit; it's the speed you need to outspeed them.)
   * `pokemon+` means `252+` in speed (e.g. timid or jolly).

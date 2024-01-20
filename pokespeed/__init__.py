@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xea0888bf
+# __coconut_hash__ = 0x5ef0d68e
 
 # Compiled with Coconut version 3.0.4-post_dev17
 
@@ -372,7 +372,7 @@ class Stage(_coconut.collections.namedtuple("Stage", ('stat_stage', 'stat_modifi
 
 
 _coconut_call_set_names(Stage)  #80 (line in Coconut source)
-important_stages = (Stage(-2), Stage(-1), Stage(0), Stage(-1, stat_modifier=2), Stage(+1), Stage(+2), Stage(+1, stat_modifier=2))  #80 (line in Coconut source)
+important_stages = (Stage(-1), Stage(0), Stage(-1, stat_modifier=2), Stage(+1), Stage(+2), Stage(+1, stat_modifier=2))  #80 (line in Coconut source)
 
 
 @_coconut_tco  #92 (line in Coconut source)
@@ -381,10 +381,10 @@ def calc_stat(base, stage=Stage(0), nature=Helpful, level=50, ev=252, iv=31,):  
 
 
 
-class PokemonSpeed(_coconut.collections.namedtuple("PokemonSpeed", ('name', 'base_speed', 'speed_stage', 'speed_nature'))):  #106 (line in Coconut source)
+class PokemonSpeed(_coconut.collections.namedtuple("PokemonSpeed", ('name', 'base_speed', 'speed_stage', 'speed_nature', 'level'))):  #106 (line in Coconut source)
     __slots__ = ()  #106 (line in Coconut source)
     _coconut_is_data = True  #106 (line in Coconut source)
-    __match_args__ = ('name', 'base_speed', 'speed_stage', 'speed_nature')  #106 (line in Coconut source)
+    __match_args__ = ('name', 'base_speed', 'speed_stage', 'speed_nature', 'level')  #106 (line in Coconut source)
     def __add__(self, other): return _coconut.NotImplemented  #106 (line in Coconut source)
     def __mul__(self, other): return _coconut.NotImplemented  #106 (line in Coconut source)
     def __rmul__(self, other): return _coconut.NotImplemented  #106 (line in Coconut source)
@@ -400,16 +400,18 @@ class PokemonSpeed(_coconut.collections.namedtuple("PokemonSpeed", ('name', 'bas
         _coconut_FunctionMatchError = _coconut_get_function_match_error()  #106 (line in Coconut source)
         if _coconut_match_first_arg is not _coconut_sentinel:  #106 (line in Coconut source)
             _coconut_match_args = (_coconut_match_first_arg,) + _coconut_match_args  #106 (line in Coconut source)
-        if (_coconut.len(_coconut_match_args) <= 4) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "name" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 1, "base_speed" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 2, "speed_stage" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 3, "speed_nature" in _coconut_match_kwargs)) == 1):  #106 (line in Coconut source)
+        if (_coconut.len(_coconut_match_args) <= 5) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "name" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 1, "base_speed" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 2, "speed_stage" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 3, "speed_nature" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 4, "level" in _coconut_match_kwargs)) == 1):  #106 (line in Coconut source)
             _coconut_match_temp_16 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("name")  #106 (line in Coconut source)
             _coconut_match_temp_21 = _coconut_match_args[1] if _coconut.len(_coconut_match_args) > 1 else _coconut_match_kwargs.pop("base_speed")  #106 (line in Coconut source)
             _coconut_match_temp_26 = _coconut_match_args[2] if _coconut.len(_coconut_match_args) > 2 else _coconut_match_kwargs.pop("speed_stage")  #106 (line in Coconut source)
             _coconut_match_temp_27 = _coconut_match_args[3] if _coconut.len(_coconut_match_args) > 3 else _coconut_match_kwargs.pop("speed_nature")  #106 (line in Coconut source)
+            _coconut_match_temp_28 = _coconut_match_args[4] if _coconut.len(_coconut_match_args) > 4 else _coconut_match_kwargs.pop("level")  #106 (line in Coconut source)
             if ((isinstance)(_coconut_match_temp_26, Stage)) and ((isinstance)(_coconut_match_temp_27, Nature)):  #106 (line in Coconut source)
                 _coconut_match_temp_17 = _coconut.getattr(str, "_coconut_is_data", False) or _coconut.isinstance(str, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in str)  # type: ignore  #106 (line in Coconut source)
                 _coconut_match_temp_22 = _coconut.getattr(int, "_coconut_is_data", False) or _coconut.isinstance(int, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in int)  # type: ignore  #106 (line in Coconut source)
                 _coconut_match_set_name_speed_stage = _coconut_match_temp_26  #106 (line in Coconut source)
                 _coconut_match_set_name_speed_nature = _coconut_match_temp_27  #106 (line in Coconut source)
+                _coconut_match_temp_29 = _coconut.getattr(int, "_coconut_is_data", False) or _coconut.isinstance(int, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in int)  # type: ignore  #106 (line in Coconut source)
                 if not _coconut_match_kwargs:  #106 (line in Coconut source)
                     _coconut_match_check_7 = True  #106 (line in Coconut source)
         if _coconut_match_check_7:  #106 (line in Coconut source)
@@ -505,6 +507,52 @@ class PokemonSpeed(_coconut.collections.namedtuple("PokemonSpeed", ('name', 'bas
 
 
         if _coconut_match_check_7:  #106 (line in Coconut source)
+            _coconut_match_check_7 = False  #106 (line in Coconut source)
+            if not _coconut_match_check_7:  #106 (line in Coconut source)
+                _coconut_match_set_name_level = _coconut_sentinel  #106 (line in Coconut source)
+                if (_coconut_match_temp_29) and (_coconut.isinstance(_coconut_match_temp_28, int)) and (_coconut.len(_coconut_match_temp_28) >= 1):  #106 (line in Coconut source)
+                    _coconut_match_set_name_level = _coconut_match_temp_28[0]  #106 (line in Coconut source)
+                    _coconut_match_temp_30 = _coconut.len(_coconut_match_temp_28) <= _coconut.max(1, _coconut.len(_coconut_match_temp_28.__match_args__)) and _coconut.all(i in _coconut.getattr(_coconut_match_temp_28, "_coconut_data_defaults", {}) and _coconut_match_temp_28[i] == _coconut.getattr(_coconut_match_temp_28, "_coconut_data_defaults", {})[i] for i in _coconut.range(1, _coconut.len(_coconut_match_temp_28.__match_args__))) if _coconut.hasattr(_coconut_match_temp_28, "__match_args__") else _coconut.len(_coconut_match_temp_28) == 1  # type: ignore  #106 (line in Coconut source)
+                    if _coconut_match_temp_30:  #106 (line in Coconut source)
+                        _coconut_match_check_7 = True  #106 (line in Coconut source)
+                if _coconut_match_check_7:  #106 (line in Coconut source)
+                    if _coconut_match_set_name_level is not _coconut_sentinel:  #106 (line in Coconut source)
+                        level = _coconut_match_set_name_level  #106 (line in Coconut source)
+
+            if not _coconut_match_check_7:  #106 (line in Coconut source)
+                if (not _coconut_match_temp_29) and (_coconut.isinstance(_coconut_match_temp_28, int)):  #106 (line in Coconut source)
+                    _coconut_match_check_7 = True  #106 (line in Coconut source)
+                if _coconut_match_check_7:  #106 (line in Coconut source)
+                    _coconut_match_check_7 = False  #106 (line in Coconut source)
+                    if not _coconut_match_check_7:  #106 (line in Coconut source)
+                        _coconut_match_set_name_level = _coconut_sentinel  #106 (line in Coconut source)
+                        if _coconut.type(_coconut_match_temp_28) in _coconut_self_match_types:  #106 (line in Coconut source)
+                            _coconut_match_set_name_level = _coconut_match_temp_28  #106 (line in Coconut source)
+                            _coconut_match_check_7 = True  #106 (line in Coconut source)
+                        if _coconut_match_check_7:  #106 (line in Coconut source)
+                            if _coconut_match_set_name_level is not _coconut_sentinel:  #106 (line in Coconut source)
+                                level = _coconut_match_set_name_level  #106 (line in Coconut source)
+
+                    if not _coconut_match_check_7:  #106 (line in Coconut source)
+                        _coconut_match_set_name_level = _coconut_sentinel  #106 (line in Coconut source)
+                        if not _coconut.type(_coconut_match_temp_28) in _coconut_self_match_types:  #106 (line in Coconut source)
+                            _coconut_match_temp_31 = _coconut.getattr(int, '__match_args__', ())  # type: _coconut.typing.Any  # type: ignore  #106 (line in Coconut source)
+                            if not _coconut.isinstance(_coconut_match_temp_31, _coconut.tuple):  #106 (line in Coconut source)
+                                raise _coconut.TypeError("int.__match_args__ must be a tuple")  #106 (line in Coconut source)
+                            if _coconut.len(_coconut_match_temp_31) < 1:  #106 (line in Coconut source)
+                                raise _coconut.TypeError("too many positional args in class match (pattern requires 1; 'int' only supports %s)" % (_coconut.len(_coconut_match_temp_31),))  #106 (line in Coconut source)
+                            _coconut_match_temp_32 = _coconut.getattr(_coconut_match_temp_28, _coconut_match_temp_31[0], _coconut_sentinel)  #106 (line in Coconut source)
+                            if _coconut_match_temp_32 is not _coconut_sentinel:  #106 (line in Coconut source)
+                                _coconut_match_set_name_level = _coconut_match_temp_32  #106 (line in Coconut source)
+                                _coconut_match_check_7 = True  #106 (line in Coconut source)
+                        if _coconut_match_check_7:  #106 (line in Coconut source)
+                            if _coconut_match_set_name_level is not _coconut_sentinel:  #106 (line in Coconut source)
+                                level = _coconut_match_set_name_level  #106 (line in Coconut source)
+
+
+
+
+        if _coconut_match_check_7:  #106 (line in Coconut source)
             if _coconut_match_set_name_speed_stage is not _coconut_sentinel:  #106 (line in Coconut source)
                 speed_stage = _coconut_match_set_name_speed_stage  #106 (line in Coconut source)
             if _coconut_match_set_name_speed_nature is not _coconut_sentinel:  #106 (line in Coconut source)
@@ -513,66 +561,66 @@ class PokemonSpeed(_coconut.collections.namedtuple("PokemonSpeed", ('name', 'bas
         if not _coconut_match_check_7:  #106 (line in Coconut source)
             raise _coconut_FunctionMatchError('data PokemonSpeed(', _coconut_match_args)  #106 (line in Coconut source)
 
-        return _coconut.tuple.__new__(_coconut_cls, (name, base_speed, speed_stage, speed_nature))  #106 (line in Coconut source)
+        return _coconut.tuple.__new__(_coconut_cls, (name, base_speed, speed_stage, speed_nature, level))  #106 (line in Coconut source)
     def __str__(self):  #106 (line in Coconut source)
-        return self.speed_stage.modifier_str() + self.name + str(self.speed_nature)  #112 (line in Coconut source)
+        return self.speed_stage.modifier_str() + self.name + str(self.speed_nature)  #113 (line in Coconut source)
 
-    @property  #113 (line in Coconut source)
-    @_coconut_tco  #114 (line in Coconut source)
-    def stat(self):  #114 (line in Coconut source)
-        return _coconut_tail_call(calc_stat, self.base_speed, self.speed_stage, self.speed_nature)  #114 (line in Coconut source)
-
-
-_coconut_call_set_names(PokemonSpeed)  #116 (line in Coconut source)
-def get_all_speeds(url, level):  #116 (line in Coconut source)
-    for mon, stage, nature in cartesian_product(get_mons(url), important_stages, important_natures):  #117 (line in Coconut source)
-        yield PokemonSpeed(mon.name, mon.base_stats.speed, stage, nature, level)  #122 (line in Coconut source)
+    @property  #114 (line in Coconut source)
+    @_coconut_tco  #115 (line in Coconut source)
+    def stat(self):  #115 (line in Coconut source)
+        return _coconut_tail_call(calc_stat, self.base_speed, self.speed_stage, self.speed_nature, self.level)  #115 (line in Coconut source)
 
 
-
-def get_outspeed_benchmarks(url, level):  #125 (line in Coconut source)
-    outspeed_benchmarks = defaultdict(_coconut_partial(defaultdict, list))  # type: dict[int, dict[Stage, list[PokemonSpeed]]]  #126 (line in Coconut source)
-    if "__annotations__" not in _coconut.locals():  #126 (line in Coconut source)
-        __annotations__ = {}  # type: ignore  #126 (line in Coconut source)
-    __annotations__["outspeed_benchmarks"] = 'dict[int, dict[Stage, list[PokemonSpeed]]]'  #126 (line in Coconut source)
-    speeds = set(get_all_speeds(url, level))  #127 (line in Coconut source)
-    for stage in important_stages:  #128 (line in Coconut source)
-        base_speed = 1  #129 (line in Coconut source)
-        unused_speeds = speeds.copy()  #130 (line in Coconut source)
-        while unused_speeds:  #131 (line in Coconut source)
-            check_speed = (stage.apply)(base_speed)  #132 (line in Coconut source)
-            for pokemon_speed in tuple(unused_speeds):  #133 (line in Coconut source)
-                if check_speed > pokemon_speed.stat:  #134 (line in Coconut source)
-                    outspeed_benchmarks[base_speed][stage].append(pokemon_speed)  #135 (line in Coconut source)
-                    unused_speeds.remove(pokemon_speed)  #136 (line in Coconut source)
-            base_speed += 1  #137 (line in Coconut source)
-    return outspeed_benchmarks  #138 (line in Coconut source)
+_coconut_call_set_names(PokemonSpeed)  #117 (line in Coconut source)
+def get_all_speeds(url, level):  #117 (line in Coconut source)
+    for mon, stage, nature in cartesian_product(get_mons(url), important_stages, important_natures):  #118 (line in Coconut source)
+        yield PokemonSpeed(mon.name, mon.base_stats.speed, stage, nature, level)  #123 (line in Coconut source)
 
 
 
-def write_csv(filename, url, level):  #141 (line in Coconut source)
-    outspeed_benchmarks = get_outspeed_benchmarks(url, level)  #142 (line in Coconut source)
-    with open(filename, "w", newline="") as csvfile:  #143 (line in Coconut source)
-        writer = csv.writer(csvfile)  #144 (line in Coconut source)
-        writer.writerow(["Speed: \\ Stage:",] + [str(stage) for stage in important_stages])  #145 (line in Coconut source)
-        for base_speed in (sorted)(outspeed_benchmarks, reverse=True):  #146 (line in Coconut source)
-            row = [base_speed,]  #147 (line in Coconut source)
-            for stage in important_stages:  #148 (line in Coconut source)
-                pokemon_speeds = outspeed_benchmarks[base_speed][stage]  #149 (line in Coconut source)
-                row.append((", ".join)((map)(str, pokemon_speeds)))  #150 (line in Coconut source)
-            writer.writerow(row)  #155 (line in Coconut source)
+def get_outspeed_benchmarks(url, level):  #126 (line in Coconut source)
+    outspeed_benchmarks = defaultdict(_coconut_partial(defaultdict, list))  # type: dict[int, dict[Stage, list[PokemonSpeed]]]  #127 (line in Coconut source)
+    if "__annotations__" not in _coconut.locals():  #127 (line in Coconut source)
+        __annotations__ = {}  # type: ignore  #127 (line in Coconut source)
+    __annotations__["outspeed_benchmarks"] = 'dict[int, dict[Stage, list[PokemonSpeed]]]'  #127 (line in Coconut source)
+    speeds = set(get_all_speeds(url, level))  #128 (line in Coconut source)
+    for stage in important_stages:  #129 (line in Coconut source)
+        base_speed = 1  #130 (line in Coconut source)
+        unused_speeds = speeds.copy()  #131 (line in Coconut source)
+        while unused_speeds:  #132 (line in Coconut source)
+            check_speed = (stage.apply)(base_speed)  #133 (line in Coconut source)
+            for pokemon_speed in tuple(unused_speeds):  #134 (line in Coconut source)
+                if check_speed > pokemon_speed.stat:  #135 (line in Coconut source)
+                    outspeed_benchmarks[base_speed][stage].append(pokemon_speed)  #136 (line in Coconut source)
+                    unused_speeds.remove(pokemon_speed)  #137 (line in Coconut source)
+            base_speed += 1  #138 (line in Coconut source)
+    return outspeed_benchmarks  #139 (line in Coconut source)
 
 
 
-def main(*, out="./outspeed_benchmarks.csv", url="https://www.pikalytics.com", level=50,):  #158 (line in Coconut source)
+def write_csv(filename, url, level):  #142 (line in Coconut source)
+    outspeed_benchmarks = get_outspeed_benchmarks(url, level)  #143 (line in Coconut source)
+    with open(filename, "w", newline="") as csvfile:  #144 (line in Coconut source)
+        writer = csv.writer(csvfile)  #145 (line in Coconut source)
+        writer.writerow(["Speed: \\ Stage:",] + [str(stage) for stage in important_stages])  #146 (line in Coconut source)
+        for base_speed in (sorted)(outspeed_benchmarks, reverse=True):  #147 (line in Coconut source)
+            row = [base_speed,]  #148 (line in Coconut source)
+            for stage in important_stages:  #149 (line in Coconut source)
+                pokemon_speeds = outspeed_benchmarks[base_speed][stage]  #150 (line in Coconut source)
+                row.append((", ".join)((map)(str, pokemon_speeds)))  #151 (line in Coconut source)
+            writer.writerow(row)  #156 (line in Coconut source)
+
+
+
+def main(*, out="./outspeed_benchmarks.csv", url="https://www.pikalytics.com", level=50,):  #159 (line in Coconut source)
     """Write Pokemon speed tier data in csv format.
 
     :param out: The csv file to write the speed tier data to.
     :param url: The Pikalytics url to get Pokemon from.
     :param level: The level of the Pokemon to compute speeds at.
-    """  #169 (line in Coconut source)
-    write_csv(out, url, level)  #170 (line in Coconut source)
+    """  #170 (line in Coconut source)
+    write_csv(out, url, level)  #171 (line in Coconut source)
 
 
 
-run_main = _coconut_partial(run, main)  #173 (line in Coconut source)
+run_main = _coconut_partial(run, main)  #174 (line in Coconut source)

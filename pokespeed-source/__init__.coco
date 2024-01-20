@@ -78,7 +78,7 @@ data Stage(int(stat_stage), stat_modifier=1):
     addpattern def modifier_str(self) = str(self) + " "
 
 important_stages = (
-    Stage(-2),
+    # Stage(-2),
     Stage(-1),
     Stage(0),
     Stage(-1, stat_modifier=2),
@@ -108,10 +108,11 @@ data PokemonSpeed(
     int(base_speed),
     speed_stage `isinstance` Stage,
     speed_nature `isinstance` Nature,
+    int(level),
 ):
     def __str__(self) = self.speed_stage.modifier_str() + self.name + str(self.speed_nature)
     @property
-    def stat(self) = calc_stat(self.base_speed, self.speed_stage, self.speed_nature)
+    def stat(self) = calc_stat(self.base_speed, self.speed_stage, self.speed_nature, self.level)
 
 def get_all_speeds(url, level):
     for mon, stage, nature in cartesian_product(
