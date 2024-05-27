@@ -135,13 +135,15 @@ important_natures = {
     ),
 }
 
+max_speed = 1000
+
 def get_benchmarks(url, level, underspeed=False):
     natures = important_natures["underspeed" if underspeed else "outspeed"]
     speeds = set(get_all_speeds(url, level, natures))
 
     benchmarks: dict[int, dict[Stage, list[PokemonSpeed]]] = defaultdict(defaultdict$(list))
     for stage in important_stages:
-        base_speed = 1000 if underspeed else 1
+        base_speed = max_speed if underspeed else 1
         unused_speeds = speeds.copy()
         while unused_speeds:
             check_speed = base_speed |> stage.apply

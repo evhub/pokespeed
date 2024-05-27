@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x941c2e58
+# __coconut_hash__ = 0xb3cfb31f
 
 # Compiled with Coconut version 3.1.0-post_dev13
 
@@ -596,54 +596,56 @@ def get_all_speeds(url, level, natures):  #116 (line in Coconut source)
 
 important_natures = _coconut.dict((("outspeed", (Helpful, Neutral)), ("underspeed", (Helpful, Neutral, Uninvested, Harmful))))  #125 (line in Coconut source)
 
-def get_benchmarks(url, level, underspeed=False):  #138 (line in Coconut source)
-    natures = important_natures["underspeed" if underspeed else "outspeed"]  #139 (line in Coconut source)
-    speeds = set(get_all_speeds(url, level, natures))  #140 (line in Coconut source)
+max_speed = 1000  #138 (line in Coconut source)
 
-    benchmarks = defaultdict(_coconut_partial(defaultdict, list))  # type: dict[int, dict[Stage, list[PokemonSpeed]]]  #142 (line in Coconut source)
-    if "__annotations__" not in _coconut.locals():  #142 (line in Coconut source)
-        __annotations__ = {}  # type: ignore  #142 (line in Coconut source)
-    __annotations__["benchmarks"] = dict[int, dict[Stage, list[PokemonSpeed]]]  #142 (line in Coconut source)
-    for stage in important_stages:  #143 (line in Coconut source)
-        base_speed = 1000 if underspeed else 1  #144 (line in Coconut source)
-        unused_speeds = speeds.copy()  #145 (line in Coconut source)
-        while unused_speeds:  #146 (line in Coconut source)
-            check_speed = (stage.apply)(base_speed)  #147 (line in Coconut source)
-            for pokemon_speed in tuple(unused_speeds):  #148 (line in Coconut source)
-                if (((_coconut.operator.lt) if underspeed else (_coconut.operator.gt)))(check_speed, pokemon_speed.stat):  #149 (line in Coconut source)
-                    benchmarks[base_speed][stage].append(pokemon_speed)  #150 (line in Coconut source)
-                    unused_speeds.remove(pokemon_speed)  #151 (line in Coconut source)
-            base_speed += -1 if underspeed else 1  #152 (line in Coconut source)
-    return benchmarks  #153 (line in Coconut source)
+def get_benchmarks(url, level, underspeed=False):  #140 (line in Coconut source)
+    natures = important_natures["underspeed" if underspeed else "outspeed"]  #141 (line in Coconut source)
+    speeds = set(get_all_speeds(url, level, natures))  #142 (line in Coconut source)
 
-
-
-def write_csv(filename, url, level, **kwargs):  #156 (line in Coconut source)
-    benchmarks = get_benchmarks(url, level, **kwargs)  #157 (line in Coconut source)
-    with open(filename, "w", newline="") as csvfile:  #158 (line in Coconut source)
-        writer = csv.writer(csvfile)  #159 (line in Coconut source)
-        writer.writerow(["Speed: \\ Stage:",] + [str(stage) for stage in important_stages])  #160 (line in Coconut source)
-        for base_speed in (sorted)(benchmarks, reverse=True):  #161 (line in Coconut source)
-            row = [base_speed,]  #162 (line in Coconut source)
-            for stage in important_stages:  #163 (line in Coconut source)
-                pokemon_speeds = benchmarks[base_speed][stage]  #164 (line in Coconut source)
-                row.append((", ".join)((map)(str, pokemon_speeds)))  #165 (line in Coconut source)
-            writer.writerow(row)  #170 (line in Coconut source)
+    benchmarks = defaultdict(_coconut_partial(defaultdict, list))  # type: dict[int, dict[Stage, list[PokemonSpeed]]]  #144 (line in Coconut source)
+    if "__annotations__" not in _coconut.locals():  #144 (line in Coconut source)
+        __annotations__ = {}  # type: ignore  #144 (line in Coconut source)
+    __annotations__["benchmarks"] = dict[int, dict[Stage, list[PokemonSpeed]]]  #144 (line in Coconut source)
+    for stage in important_stages:  #145 (line in Coconut source)
+        base_speed = max_speed if underspeed else 1  #146 (line in Coconut source)
+        unused_speeds = speeds.copy()  #147 (line in Coconut source)
+        while unused_speeds:  #148 (line in Coconut source)
+            check_speed = (stage.apply)(base_speed)  #149 (line in Coconut source)
+            for pokemon_speed in tuple(unused_speeds):  #150 (line in Coconut source)
+                if (((_coconut.operator.lt) if underspeed else (_coconut.operator.gt)))(check_speed, pokemon_speed.stat):  #151 (line in Coconut source)
+                    benchmarks[base_speed][stage].append(pokemon_speed)  #152 (line in Coconut source)
+                    unused_speeds.remove(pokemon_speed)  #153 (line in Coconut source)
+            base_speed += -1 if underspeed else 1  #154 (line in Coconut source)
+    return benchmarks  #155 (line in Coconut source)
 
 
 
-def main(*, out: str="", underspeed: bool=False, url: str="https://www.pikalytics.com", level: int=50,):  #173 (line in Coconut source)
+def write_csv(filename, url, level, **kwargs):  #158 (line in Coconut source)
+    benchmarks = get_benchmarks(url, level, **kwargs)  #159 (line in Coconut source)
+    with open(filename, "w", newline="") as csvfile:  #160 (line in Coconut source)
+        writer = csv.writer(csvfile)  #161 (line in Coconut source)
+        writer.writerow(["Speed: \\ Stage:",] + [str(stage) for stage in important_stages])  #162 (line in Coconut source)
+        for base_speed in (sorted)(benchmarks, reverse=True):  #163 (line in Coconut source)
+            row = [base_speed,]  #164 (line in Coconut source)
+            for stage in important_stages:  #165 (line in Coconut source)
+                pokemon_speeds = benchmarks[base_speed][stage]  #166 (line in Coconut source)
+                row.append((", ".join)((map)(str, pokemon_speeds)))  #167 (line in Coconut source)
+            writer.writerow(row)  #172 (line in Coconut source)
+
+
+
+def main(*, out: str="", underspeed: bool=False, url: str="https://www.pikalytics.com", level: int=50,):  #175 (line in Coconut source)
     """Write Pokemon speed tier data in csv format.
 
     :param out: The csv file to write the speed tier data to.
     :param underspeed: Whether to calculate underspeed benchmarks instead of outspeed benchmarks.
     :param url: The Pikalytics url to get Pokemon from.
     :param level: The level of the Pokemon to compute speeds at.
-    """  #186 (line in Coconut source)
-    if not out:  #187 (line in Coconut source)
-        out = "./underspeed_benchmarks.csv" if underspeed else "./outspeed_benchmarks.csv"  #188 (line in Coconut source)
-    write_csv(out, url, level, underspeed=underspeed)  #189 (line in Coconut source)
+    """  #188 (line in Coconut source)
+    if not out:  #189 (line in Coconut source)
+        out = "./underspeed_benchmarks.csv" if underspeed else "./outspeed_benchmarks.csv"  #190 (line in Coconut source)
+    write_csv(out, url, level, underspeed=underspeed)  #191 (line in Coconut source)
 
 
 
-run_main = _coconut_partial(run, main)  #192 (line in Coconut source)
+run_main = _coconut_partial(run, main)  #194 (line in Coconut source)
