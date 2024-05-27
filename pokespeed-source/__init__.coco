@@ -91,17 +91,6 @@ def calc_stat(
 )
 
 
-important_stages = (
-    # Stage(-2),
-    Stage(-1),
-    Stage(0),
-    Stage(-1, stat_modifier=2),
-    Stage(+1),
-    Stage(+2),
-    # Stage(+1, stat_modifier=1.5),
-    Stage(+1, stat_modifier=2),
-)
-
 data PokemonSpeed(
     str(name),
     int(base_speed),
@@ -113,14 +102,33 @@ data PokemonSpeed(
     @property
     def stat(self) = calc_stat(self.base_speed, self.speed_stage, self.speed_nature, self.level)
 
-def get_all_speeds(url, level, natures):
+def get_all_speeds(url, level, stages, natures):
     for mon, stage, nature in cartesian_product(
         get_mons(url),
-        important_stages,
+        stages,
         natures,
     ):
         yield PokemonSpeed(mon.name, mon.base_stats.speed, stage, nature, level)
 
+
+important_stages = {
+    "outspeed": (
+        # Stage(-2),
+        Stage(-1),
+        Stage(0),
+        Stage(-1, stat_modifier=2),
+        Stage(+1),
+        Stage(+2),
+        # Stage(+1, stat_modifier=1.5),
+        Stage(+1, stat_modifier=2),
+    ),
+    "underspeed": (
+        Stage(-1),
+        Stage(0),
+        Stage(+1),
+        Stage(+2),
+    ),
+}
 
 important_natures = {
     "outspeed": (
@@ -139,10 +147,11 @@ max_speed = 1000
 
 def get_benchmarks(url, level, underspeed=False):
     natures = important_natures["underspeed" if underspeed else "outspeed"]
-    speeds = set(get_all_speeds(url, level, natures))
+    stages = important_stages["underspeed" if underspeed else "outspeed"]
+    speeds = set(get_all_speeds(url, level, stages, natures))
 
     benchmarks: dict[int, dict[Stage, list[PokemonSpeed]]] = defaultdict(defaultdict$(list))
-    for stage in important_stages:
+    for stage in stages:
         base_speed = max_speed if underspeed else 1
         unused_speeds = speeds.copy()
         while unused_speeds:
@@ -155,14 +164,15 @@ def get_benchmarks(url, level, underspeed=False):
     return benchmarks
 
 
-def write_csv(filename, url, level, **kwargs):
-    benchmarks = get_benchmarks(url, level, **kwargs)
+def write_csv(filename, url, level, underspeed=False):
+    stages = important_stages["underspeed" if underspeed else "outspeed"]
+    benchmarks = get_benchmarks(url, level, underspeed=underspeed)
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["Speed: \\ Stage:"] + [str(stage) for stage in important_stages])
+        writer.writerow(["Speed: \\ Stage:"] + [str(stage) for stage in stages])
         for base_speed in benchmarks |> sorted$(reverse=True):
             row = [base_speed]
-            for stage in important_stages:
+            for stage in stages:
                 pokemon_speeds = benchmarks[base_speed][stage]
                 row.append(
                     pokemon_speeds
