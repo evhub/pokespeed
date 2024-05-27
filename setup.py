@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="pokespeed",
-    version="1.0.1",
+    version="1.1.0",
     description="Calculate Pokemon speed tiers.",
     long_description="Run `pokespeed` to generate a csv of speed tiers.",
     url="https://github.com/evhub/pokespeed",

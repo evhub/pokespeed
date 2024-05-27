@@ -163,4 +163,4 @@ cython_debug/
 __coconut_cache__/
 
 # Pokespeed
-outspeed_benchmarks.csv
+*.csv

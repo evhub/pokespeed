@@ -1,14 +1,17 @@
 .PHONY: run
 run: install
 	pokespeed
+	pokespeed --underspeed
 
 .PHONY: force-run
 force-run: force-install
 	pokespeed
+	pokespeed --underspeed
 
 .PHONY: open
 open: run
 	open ./outspeed_benchmarks.csv
+	open ./underspeed_benchmarks.csv
 
 .PHONY: install
 install: build
@@ -24,14 +27,14 @@ setup:
 
 .PHONY: unclean-build
 unclean-build:
-	coconut pokespeed-source pokespeed --strict --target 3
+	coconut pokespeed-source pokespeed --strict --target 3 --no-wrap
 
 .PHONY: build
 build: clean unclean-build
 
 .PHONY: force-build
 force-build: clean
-	coconut pokespeed-source pokespeed --force --strict --target 3
+	coconut pokespeed-source pokespeed --force --strict --target 3 --no-wrap
 
 .PHONY: package
 package:
@@ -56,4 +59,4 @@ wipe: clean
 
 .PHONY: watch
 watch: install
-	coconut pokespeed-source pokespeed --watch --strict --target 3
+	coconut pokespeed-source pokespeed --watch --strict --target 3 --no-wrap
